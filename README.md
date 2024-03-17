@@ -1,4 +1,4 @@
-[![Naver Paper Python GitHub Actions](https://github.com/stateofai/naver-paper/actions/workflows/action.yml/badge.svg)](https://github.com/stateofai/naver-paper/actions/workflows/action.yml)
+[![Naver Paper Python GitHub Actions](https://github.com/wrinos/naver-paper/actions/workflows/action.yml/badge.svg)](https://github.com/wrinos/naver-paper/actions/workflows/action.yml)
 
 > 기존 requests 모듈을 이용한 로그인이 작동하지 않아 selenium을 사용하도록 변경되었습니다. (Thanks to @bagng)
 > chromedriver 설치 후 코드를 실행해주세요.

@@ -2,9 +2,9 @@ import requests
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 
-base_url = "https://www.clien.net/service/board/jirum"
+base_url = "https://www.damoang.net/economy"
 
-def find_naver_campaign_links(visited_urls_file='visited_urls_clien.txt'):
+def find_naver_campaign_links(visited_urls_file='visited_urls_damoang.txt'):
     # Read visited URLs from file
     try:
         with open(visited_urls_file, 'r') as file:
@@ -17,7 +17,7 @@ def find_naver_campaign_links(visited_urls_file='visited_urls_clien.txt'):
     soup = BeautifulSoup(response.text, 'html.parser')
 
     # Find all span elements with class 'list_subject' and get 'a' tags
-    list_subject_links = soup.find_all('span', class_='list_subject')
+    list_subject_links = soup.find_all('li', class_='list-group-item')
 
     naver_links = []
     for span in list_subject_links:
@@ -31,7 +31,7 @@ def find_naver_campaign_links(visited_urls_file='visited_urls_clien.txt'):
     # Check each Naver link
     for link in naver_links:
         full_link = urljoin(base_url, link)
-        print("clien\tlinks : " + full_link)
+        print("damoang\tlinks : " + full_link)
         if full_link in visited_urls:
             continue  # Skip already visited links
 

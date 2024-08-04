@@ -2,9 +2,10 @@ import requests
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 
-base_url = "https://www.damoang.net/economy"
+base_url = "https://bbs.ruliweb.com/market/board/1020"
+key = 'ruliweb'
 
-def find_naver_campaign_links(visited_urls_file='visited_urls_damoang.txt'):
+def find_naver_campaign_links(visited_urls_file='visited_urls_'+ key +'.txt'):
     # Read visited URLs from file
     try:
         with open(visited_urls_file, 'r') as file:
@@ -13,15 +14,12 @@ def find_naver_campaign_links(visited_urls_file='visited_urls_damoang.txt'):
         visited_urls = set()
 
     # Send a request to the base URL
-    request_headers = {
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-    }
-    response = requests.get(base_url, headers=request_headers)
-    print(f"damoang\tlist get HTTP STATUS : {response.status_code}")
+    response = requests.get(base_url)
+    print(f"{key}\tlist get HTTP STATUS : {response.status_code}")
     soup = BeautifulSoup(response.text, 'html.parser')
 
     # Find all span elements with class 'list_subject' and get 'a' tags
-    list_subject_links = soup.find_all('li', class_='list-group-item')
+    list_subject_links = soup.find_all('td', class_='subject')
 
     naver_links = []
     for span in list_subject_links:
@@ -34,12 +32,12 @@ def find_naver_campaign_links(visited_urls_file='visited_urls_damoang.txt'):
 
     # Check each Naver link
     for link in naver_links:
-        full_link = urljoin(base_url, link)
-        print("damoang\tlinks : " + full_link)
+        full_link = link;
+        print(f"{key}\tlinks : " + full_link)
         if full_link in visited_urls:
             continue  # Skip already visited links
 
-        res = requests.get(full_link, headers=request_headers)
+        res = requests.get(full_link)
         inner_soup = BeautifulSoup(res.text, 'html.parser')
 
         # Find all links that start with the campaign URL

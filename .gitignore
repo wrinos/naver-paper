@@ -1,3 +1,7 @@
 log/
 __pycache__/
 run.sh
+*.log
+user_dir
+*.txt
+*.json

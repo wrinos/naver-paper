@@ -65,6 +65,12 @@ $ python run_new.py -i YOUR_ID -p YOUR_PW
 
 # argument 로 멀티 계정 입력
 $ python run_new.py -c '[{"id":"ID_1","pw":"PW_1"},{"id":"ID_2","pw":"PW_2"}]'
+
+# 브라우저 표시 --no-headless
+$ python run_new.py -c '[{"id":"ID_1","pw":"PW_1"}]' --no-headless
+
+# credential-file로 로그인
+$ python run_new.py -cf accounts.json
 ```
 
 ## Contribution
